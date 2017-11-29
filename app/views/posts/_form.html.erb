@@ -1,0 +1,64 @@
+<!-- Page Header -->
+<header class="masthead" style="background-image: url(<%= image_url 'contact-bg.jpg'%>)">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="page-heading">
+          <h1>New Post</h1>
+          <span class="subheading">Create a new Post</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
+      <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
+      <!-- To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
+      <%= form_for(@post, id: "contactForm") do |f|%>
+        <div class="control-group">
+          <div class="form-group floating-label-form-group controls">
+            <%= f.label :title %>
+            <!-- 두번째 파라미터는 value를 넣어줘야 하는데 우린 필요가 없으므로 ""를 넣어줌 -->
+            <%= f.text_field :title, placeholder: "Title", class: "form-control"%>
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="form-group floating-label-form-group controls">
+            <%= f.label :contents %>
+            <%= f.text_field :contents, placeholder: "Contents", class: "form-control"%>
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+        <br>
+        <div id="success"></div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary" id="sendMessageButton">Enroll</button>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+
+<%= form_for(@post) do |f| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<% end %>
